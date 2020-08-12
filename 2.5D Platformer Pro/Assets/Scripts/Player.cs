@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         Vector3 direction = new Vector3(horizontalInput, 0, 0);
         Vector3 velocity = direction * _speed;
 
-        //ifgrounded
+        //if grounded
         //do nothing
         //else
         //apply gravity
@@ -46,18 +46,17 @@ public class Player : MonoBehaviour
                 _canDoubleJump = true;
             }
 
-        } else
-        {
-            //check for double jump
-            //current _yvelocity += jumpheight
+        }
 
-            if(Input.GetKeyDown(KeyCode.Space))
+        //check for double jump
+        //current _yvelocity += jumpheight
+
+        else
+        {
+            if(Input.GetKeyDown(KeyCode.Space) || _canDoubleJump == true)
             {
-                if(_canDoubleJump == true)
-                {
                     _yVelocity += _jumpHeight;
                     _canDoubleJump = false;
-                }
             }
 
             _yVelocity -= _gravity;
