@@ -16,7 +16,7 @@ public class MovingPlatform : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //current transform value (transform.position) = vector3.movetowards(current position, target, )
         //move to point b
@@ -42,9 +42,21 @@ public class MovingPlatform : MonoBehaviour
                 _atPointB = false;
             }
         }
+    }
 
-        
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            other.transform.parent = this.transform;
+        }
+    }
 
-
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            other.transform.parent = null;
+        }
     }
 }
