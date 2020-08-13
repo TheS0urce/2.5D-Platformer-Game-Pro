@@ -61,13 +61,21 @@ public class Player : MonoBehaviour
         //check for double jump
         //current _yvelocity += jumpheight
 
-        else if(Input.GetKeyDown(KeyCode.Space) || _canDoubleJump == true)
+        else 
         {
-            _yVelocity += _jumpHeight;
-            _canDoubleJump = false;
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                if(_canDoubleJump == true)
+                {
+                    _yVelocity += _jumpHeight;
+                    _canDoubleJump = false;
+                }
+            }
+
+            _yVelocity -= _gravity;
         }
 
-        _yVelocity -= _gravity;
+        
         velocity.y = _yVelocity;
 
         _controller.Move(velocity * Time.deltaTime);
