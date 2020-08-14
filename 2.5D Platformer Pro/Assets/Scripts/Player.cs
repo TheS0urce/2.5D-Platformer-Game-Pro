@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
     // variable player coins
     private int _coins;
     private UIManager _uIManager;
+    [SerializeField]
+    private int _lives = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,8 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("UI Manager is NULL");
         }
+
+        _uIManager.UpdateLivesDisplay(_lives);
     }
 
     // Update is called once per frame
@@ -89,5 +94,16 @@ public class Player : MonoBehaviour
         {
             _uIManager.UpdateCoinDisplay(_coins);
         }
+    }
+
+    public void Damage()
+    {
+        _lives--;
+        _uIManager.UpdateLivesDisplay(_lives);
+
+        if(_lives < 1)
+        {
+            SceneManager.LoadScene(0);
+        } 
     }
 }
